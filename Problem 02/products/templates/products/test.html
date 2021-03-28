@@ -1,0 +1,33 @@
+{% extends "products/base.html" %}
+
+{% block main_content %}
+
+    <main class="mt-5">
+        <div class="container">
+            {% for productList in productLists %}
+                <div class="row">
+                    {% for product in productList %}
+                        <div class="col-lg-4 col-md-4 mb-4 h-100">
+                            <div class="card">
+                                <div class="view overlay">
+                                    <img src={{ product.image_source }} class="card-img-top"
+                                         alt="product image">
+                                    <a href={{ product.source }}>
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <!--Title-->
+                                    <h6 class="card-title">{{ product.name }}</h6>
+                                    <!--Text-->
+                                    <p class="card-text">BDT {{ product.price }} Taka</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+{% endblock %}
