@@ -1,356 +1,39 @@
 {% extends "products/base.html" %}
 
 {% block main_content %}
+
     <main class="mt-5">
-      <!--Main container-->
-      <div class="container">
-        <!--Grid row-->
-        <div class="row">
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/61wKZ4noXaL._AC_SL1024_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/Samsung-Electronics-microSDXC-Adapter-MB-ME256HA/dp/B0887P21Z2/ref=sr_1_8?dchild=1&qid=1616843820&s=electronics&sr=1-8"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  Samsung Electronics EVO Select 256GB MicroSDXC UHS-I U3
-                  100MB/s Full HD & 4K UHD Memory Card with Adapter (MB-ME256HA)
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 11,075.56 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/81ti8lPxEjL._AC_SL1500_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/SanDisk-128GB-MicroSDXC-Memory-Adapter/dp/B08GYKNCCP/ref=sr_1_6?dchild=1&qid=1616843820&s=electronics&sr=1-6"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  SanDisk 128GB Ultra MicroSDXC UHS-I Memory Card with Adapter -
-                  120MB/s, C10, U1, Full HD, A1, Micro SD Card -
-                  SDSQUA4-128G-GN6MA
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 9,165.78 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/51IEVgCe89L._AC_SL1044_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/SanDisk-Ultra-microSDXC-Memory-Adapter/dp/B073JYVKNX/ref=sr_1_24?dchild=1&qid=1616843820&s=electronics&sr=1-24"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  SanDisk 64GB Ultra microSDXC UHS-I Memory Card with Adapter -
-                  100MB/s, C10, U1, Full HD, A1, Micro SD Card -
-                  SDSQUAR-064G-GN6MA
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 7,699.18 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
+        <div class="container">
+            {% for productList in productLists %}
+                <div class="row">
+                    {% for product in productList %}
+                        <div class="col-lg-4 col-md-4 mb-4 h-100 main">
+                            <div class="card">
+                                <div class="view overlay">
+                                    <img src={{ product.image_source }} class="card-img-top"
+                                         alt="product image">
+                                    <a href={{ product.source }}>
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ product.name }}</h6>
+                                    <p class="card-text">BDT {{ product.price }} Taka</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </div>
-        <!--Grid row-->
-        <!--Grid row-->
-        <div class="row">
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/815cRpgAN3L._AC_SL1500_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/SanDisk-128GB-Extreme-microSD-Adapter/dp/B07FCMKK5X/ref=sr_1_9?dchild=1&qid=1616843820&s=electronics&sr=1-9"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  SanDisk 128GB Extreme microSDXC UHS-I Memory Card with Adapter
-                  - C10, U3, V30, 4K, A2, Micro SD - SDSQXA1-128G-GN6MA
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 9,641.95 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/810o-i5jpiL._AC_SL1500_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/SanDisk-MicroSDXC-Nintendo-Switch-SDSQXAO-128G-GNCZN/dp/B07KXQX3S3/ref=sr_1_7?dchild=1&qid=1616843820&s=electronics&sr=1-7"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  SanDisk 128GB microSDXC-Card, Licensed for Nintendo-Switch -
-                  SDSQXAO-128G-GNCZN
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 10,016.64 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/81UzXyarPpL._AC_SL1500_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/SanDisk-MicroSDXC-Nintendo-Switch-SDSQXAT-064G-GNCZN/dp/B07KXRGM8X/ref=pb_allspark_session_sims_desktop_5?pd_rd_w=OJQev&pf_rd_p=bfefd6e2-acb1-463d-94d0-38a6e00f41d3&pf_rd_r=797P1ZX7PWNWT74ZM8T5&pd_rd_r=f7058bd8-46d7-4c83-9655-313629eb9032&pd_rd_wg=urRrN&pd_rd_i=B07KXRGM8X&psc=1"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  SanDisk 64GB microSDXC-Card, Licensed for Nintendo-Switch -
-                  SDSQXAT-064G-GNCZN
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 8,510.29 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-        </div>
-        <!--Grid row-->
-        <!--Grid row-->
-        <div class="row">
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/71vmol0h95L._AC_SL1500_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/TOZO-Bluetooth-Headphones-Intelligence-Waterproof/dp/B085DL3KMR/ref=sr_1_31?dchild=1&qid=1616843820&s=electronics&sr=1-31"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  TOZO T12 Wireless Earbuds Bluetooth Headphones Premium
-                  Fidelity Sound Quality Wireless Charging Case Digital LED
-                  Intelligence Display IPX8 Waterproof...
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 15702.01 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/41FhVUcnsRL._AC_SL1000_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/Cricut-EasyPress-Machine-Shirts-Projects/dp/B07PYLYL9C/ref=sr_1_1?dchild=1&keywords=Cricut+EasyPress+2+-+Heat+Press+Machine+For+T+Shirts+and+HTV+Vinyl+Projects%2C+Mint%2C+12%22+x+10%22&qid=1616891487&sr=8-1"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  Cricut EasyPress 2 - Heat Press Machine For T Shirts and HTV
-                  Vinyl Projects, Mint, 12" x 10"
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 63,993.81 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-5 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/71lZgh-zG3L._AC_SL1500_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/Cricut-EasyPress-2-12x10-Inches/dp/B07G51DZ45/ref=sr_1_1?dchild=1&keywords=Cricut+EasyPress+2+-+Heat+Press+Machine+For+T+Shirts+and+HTV+Vinyl+Projects%2C+Raspberry%2C+12%22+x+10%22&qid=1616891632&sr=8-1"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  Cricut EasyPress 2 - Heat Press Machine For T Shirts and HTV
-                  Vinyl Projects, Raspberry, 12" x 10"
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 64,129.99 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-        </div>
-        <!--Grid row-->
-        <!--Grid row-->
-        <div class="row">
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-4 mb-4 h-100">
-            <!--Card-->
-            <div class="card">
-              <!--Card image-->
-              <div class="view overlay">
-                <img
-                  src="https://images-na.ssl-images-amazon.com/images/I/71Oc-6pmGSL._AC_SL1500_.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
-                <a
-                  href="https://www.amazon.com/Brother-DCP-L2550DW-HL-L2350DW-MFC-L2710-Replacement/dp/B075X6C5ZW/ref=pd_rhf_se_p_img_11?_encoding=UTF8&psc=1&refRID=AK6X947E0WDDPEGK0S9W"
-                >
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <h6 class="card-title">
-                  Brother Genuine Cartridge TN760 High Yield Black Toner
-                </h6>
-                <!--Text-->
-                <p class="card-text">BDT 21,218.22 Taka</p>
-              </div>
-            </div>
-            <!--/.Card-->
-          </div>
-          <!--Grid column-->
-        </div>
-        <!--Grid row-->
-      </div>
-      <!--Main container-->
     </main>
-{#    {% for product in productList %}#}
-{#        <ul>#}
-{#            <li>{{ product.name }}</li>#}
-{#            <li>{{ product.price }}</li>#}
-{#            <li>{{ product.image_source }}</li>#}
-{#            <li>{{ product.source }}</li>#}
-{#        </ul>#}
-{#    {% endfor %}#}
+
+{% endblock %}
+
+{% block footer %}
+    {% if length > 0 %}
+        <footer class="page-footer font-small blue">
+            <div class="footer-copyright text-center py-3">No copyright issue.</div>
+        </footer>
+    {% endif %}
 {% endblock %}
