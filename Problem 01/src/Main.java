@@ -154,9 +154,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int option = 0;
         boolean err = true;
-        while (err || option<0 || option>max){
+        while (err){
             try{
                 option = Integer.parseInt(scanner.nextLine());
+                if( option<0 || option>max){
+                    System.out.println("Please choose a valid option.");
+                    continue;
+                }
                 err = false;
             }catch (NumberFormatException ex) {
                 System.out.println("Please choose a valid option.");
