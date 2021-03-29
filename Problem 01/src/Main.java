@@ -19,7 +19,7 @@ public class Main {
                     int className = getClassName();
                     if(className == 0) break;
                     int id = getId(classes[className-1]);
-                    String name = getName();
+                    String name = getName(true);
                     boolean[] subjects = new boolean[3];
                     System.out.println("What subjects do you teach? Reply with 'y' or 'n' (without quotes)");
                     String reply;
@@ -38,13 +38,25 @@ public class Main {
                 }
                 case 2 -> {
                     int className = getClassName();
-                    int id = getId();
-                    String name = getName();
                     if(className == 0) break;
-                    int subName = getSubject();
-                    if(subName == 0) break;
+                    int id = getId();
+                    while (!checkId(id, classes[className-1])){
+                        System.out.println("Please Enter a valid id that exists!! or press 0 to go to previous menu");
+                        id = getId(false);
+                        if(id == 0) break;
+                    }
+                    if(id == 0) break;
+                    String name = getName(true);
+                    while (!checkName(name, classes[className-1])){
+                        System.out.println("Please Enter a name that exists!! or press 0 to go to previous menu");
+                        name = getName(false);
+                        if(name.equals("0")) break;
+                    }
+                    if(name.equals("0")) break;
                     int subOption = getEditOption();
                     if (subOption == 0) break;
+                    int subName = getSubject();
+                    if(subName == 0) break;
                     while (subOption!=1 && subOption!=2) subOption = scanner.nextInt();
                     switch (subOption){
                         case 1 -> {
@@ -60,7 +72,7 @@ public class Main {
                 case 3 -> {
                     int className = getClassName();
                     int id = getId();
-                    String name = getName();
+                    String name = getName(true);
                     classes[className-1].deleteStudent(id, name);
                 }
 
@@ -120,7 +132,8 @@ public class Main {
                         case 6 -> {
                             double totalMarks = classes[0].getTotalMarks() + classes[1].getTotalMarks() + classes[2].getTotalMarks();
                             double noOfExams = classes[0].getNoOfExams() + classes[1].getNoOfExams() + classes[2].getNoOfExams();
-                            System.out.println("Average Marks : " + (totalMarks/noOfExams));
+                            double avgMarks = Double.isNaN(totalMarks/noOfExams) ? 0.0 : (totalMarks/noOfExams);
+                            System.out.println("Average Marks : " + Math.max(avgMarks, 0.0));
                         }
                     }
                 }
@@ -198,11 +211,18 @@ public class Main {
         return getOption(2);
     }
 
-    public static String getName(){
+    public static String getName(boolean print){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter name of the student.");
+        if(print) System.out.println("Enter name of the student.");
         String name = "";
-        while (!isValidName(name)) name = name.concat(scanner.nextLine());
+        boolean firstTime = true;
+        while (!isValidName(name)){
+            if(!firstTime) System.out.println("Enter a name with valid format.");
+            firstTime = false;
+            name = "";
+            name = name.concat(scanner.nextLine());
+            if(name.equals("0")) return name;
+        }
         return name;
     }
 
@@ -224,8 +244,14 @@ public class Main {
         return value;
     }
 
+
     public static int getId(){
-        System.out.println("Enter the id of the student.");
+        System.out.println("Enter id of the student.");
+        return getValidInt();
+    }
+
+    public static int getId(boolean print){
+        if(print) System.out.println("Enter id of the student.");
         return getValidInt();
     }
 
@@ -234,7 +260,7 @@ public class Main {
         while (checkId(id, students)){
             System.out.println("This has been inserted already or less than 1. " +
                     "Please re-enter a valid id which has not been inserted yet.");
-            id = getId();
+            id = getId(false);
         }
         return id;
     }
@@ -259,6 +285,15 @@ public class Main {
             }
         }
         return marks;
+    }
+
+    public static boolean checkName(String name, Students students){
+        for(Student student: students.getStudents()){
+            if(student.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean checkId(int id, Students students){

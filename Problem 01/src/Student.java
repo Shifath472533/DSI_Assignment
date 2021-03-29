@@ -43,6 +43,10 @@ public class Student {
     }
 
     public void addDays(int noOfDays, int subName){
+        if (!subjects[subName-1].isTaken()){
+            System.out.println("You don't teach this subject. Couldn't update the data.");
+            return;
+        }
         this.daysTaught += noOfDays;
         this.earnings += (double) noOfDays;
         Subject sub = this.subjects[subName-1];
