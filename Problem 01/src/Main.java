@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) {
         // class -> 8, 9, 10
-        Students[] classes = {new Students(), new Students(), new Students()};
+        Students[] classes = {new Students("class8"), new Students("class9"), new Students("class10")};
+        for(int i=0; i<3; i++) classes[i].load();
         Scanner scanner = new Scanner(System.in);
         while(true){
             printMenu1();
@@ -17,10 +18,10 @@ public class Main {
                 case 1 -> {
                     int className = getClassName();
                     if(className == 0) break;
-                    int id = getId(classes[className]);
+                    int id = getId(classes[className-1]);
                     String name = getName();
                     boolean[] subjects = new boolean[3];
-                    System.out.println("What subjects do you teach? Reply with 'y' or 'n");
+                    System.out.println("What subjects do you teach? Reply with 'y' or 'n' (without quotes)");
                     String reply;
                     String[] subNames = {"Math", "English", "Bangla"};
                     for (int i = 0; i < 3; i++) {
@@ -33,7 +34,7 @@ public class Main {
                         }
                         subjects[i] = reply.equals("y");
                     }
-                    classes[className].addStudent(id, name, subjects);
+                    classes[className-1].addStudent(id, name, subjects);
                 }
                 case 2 -> {
                     int id = getId();
@@ -48,11 +49,11 @@ public class Main {
                     switch (subOption){
                         case 1 -> {
                             int days = getDays();
-                            classes[className].editStudent(id, name, days, subName);
+                            classes[className-1].editStudent(id, name, days, subName);
                         }
                         case 2 -> {
                             double marks = getMarks();
-                            classes[className].editStudent(id, name, marks);
+                            classes[className-1].editStudent(id, name, marks);
                         }
                     }
                 }
@@ -60,12 +61,12 @@ public class Main {
                     int id = getId();
                     String name = getName();
                     int className = getClassName();
-                    classes[className].deleteStudent(id, name);
+                    classes[className-1].deleteStudent(id, name);
                 }
 
                 case 4 -> {
                     int className = getClassName();
-                    if(classes[className].getStudents().size() == 0){
+                    if(classes[className-1].getStudents().size() == 0){
                         System.out.println();
                         System.out.println("No student found in this class.");
                         System.out.println();
@@ -77,14 +78,14 @@ public class Main {
                     headersList.add("Name");
                     headersList.add("Total Earnings");
                     headersList.add("Average Marks");
-                    ArrayList<ArrayList<String>> rowsList = classes[className].getStudentsInfo();
+                    ArrayList<ArrayList<String>> rowsList = classes[className-1].getStudentsInfo();
                     System.out.println(tableGenerator.generateTable(headersList, Collections.unmodifiableList(rowsList)));
                     while (true){
                         System.out.println("Enter a valid Id to see details of that student. Press 0 to see previous Menu");
                         int id = getId();
                         if(id == 0) break;
-                        if(checkId(id, classes[className])) {
-                            classes[className].printStudentDetails(id);
+                        if(checkId(id, classes[className-1])) {
+                            classes[className-1].printStudentDetails(id);
                         }
                     }
                 }
@@ -227,8 +228,8 @@ public class Main {
     public static int getId(Students students){
         int id = getId();
         while (checkId(id, students)){
-            System.out.println("This has been inserted already or less than 1" +
-                    "Please enter a valid id which has not been inserted yet.");
+            System.out.println("This has been inserted already or less than 1. " +
+                    "Please re-enter a valid id which has not been inserted yet.");
             id = getId();
         }
         return id;

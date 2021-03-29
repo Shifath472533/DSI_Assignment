@@ -1,6 +1,6 @@
 public class Student {
-    private String name;
     private int id;
+    private String name;
     private static final String[] subNames = {"Math", "English", "Bangla"};
     // Math, English, Bangla
     private Subject[] subjects;
@@ -20,6 +20,24 @@ public class Student {
         this.earnings = 0.0;
     }
 
+    public Student(String[] data){
+        this.id = Integer.parseInt(data[0]);
+        this.name = data[1];
+        subjects = new Subject[3];
+        try {
+            for (int i = 2; i < 5; i++) subjects[i-2] = new Subject(data[i].split("\t"));
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Error occurred...");
+            System.out.println(data.length);
+            for(String s: data) System.out.println(s);
+            System.out.println("END");
+        }
+        this.totalMarks = Double.parseDouble(data[5]);
+        this.noOfExams = Integer.parseInt(data[6]);
+        this.daysTaught = Integer.parseInt(data[7]);
+        this.earnings = Double.parseDouble(data[8]);
+    }
+
     public void addSubjects(boolean[] subjects){
         for(int i=0; i<3; i++) this.subjects[i].setTaken(subjects[i]);
     }
@@ -28,7 +46,7 @@ public class Student {
         this.daysTaught += noOfDays;
         this.earnings += (double) noOfDays;
         Subject sub = this.subjects[subName-1];
-        sub.setTaughDays(sub.getTaughDays() + noOfDays);
+        sub.setTaughtDays(sub.getTaughtDays() + noOfDays);
         sub.setEarnings(sub.getEarnings() + (double) noOfDays);
     }
 
@@ -104,4 +122,17 @@ public class Student {
         return totalMarks;
     }
 
+    public String getString(){
+        String studentInfo = "";
+        studentInfo = studentInfo.concat(Integer.toString(id) + "\t\t");
+        studentInfo = studentInfo.concat(name + "\t\t");
+        studentInfo = studentInfo.concat(subjects[0].getString() + "\t\t");
+        studentInfo = studentInfo.concat(subjects[1].getString() + "\t\t");
+        studentInfo = studentInfo.concat(subjects[2].getString() + "\t\t");
+        studentInfo = studentInfo.concat(Double.toString(totalMarks) + "\t\t");
+        studentInfo = studentInfo.concat(Integer.toString(noOfExams) + "\t\t");
+        studentInfo = studentInfo.concat(Integer.toString(daysTaught) + "\t\t");
+        studentInfo = studentInfo.concat(Double.toString(earnings));
+        return studentInfo;
+    }
 }

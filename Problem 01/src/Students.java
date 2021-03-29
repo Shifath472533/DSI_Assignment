@@ -1,18 +1,23 @@
 import java.util.ArrayList;
 
 public class Students {
+    private String className;
     private ArrayList<Student> students;
     private double totalEarnings;
+    FileController fileController;
 
-    Students(){
-        students = new ArrayList<>();
-        totalEarnings = 0.0;
+    Students(String className){
+        this.className = className;
+        this.students = new ArrayList<>();
+        this.totalEarnings = 0.0;
+        fileController = new FileController();
     }
 
     public void addStudent(int id, String name, boolean[] subjects){
         Student student = new Student(id, name);
         student.addSubjects(subjects);
         students.add(student);
+        fileController.save(getString(), className);
     }
     public void editStudent(int id, String name, int days, int subName){
         for(Student student: students){
@@ -20,6 +25,7 @@ public class Students {
                 student.addDays(days, subName);
         }
         this.totalEarnings += days;
+        fileController.save(getString(), className);
     }
 
     public void editStudent(int id, String name, double marks){
@@ -27,6 +33,7 @@ public class Students {
             if(student.getId() == id && student.getName().equals(name))
                 student.addMarks(marks);
         }
+        fileController.save(getString(), className);
     }
 
 
@@ -35,11 +42,12 @@ public class Students {
         for(int i=0; i< students.size(); i++){
             Student student = students.get(i);
             if(student.getId() == id && student.getName().equals(name)){
-                Student student1 = students.remove(i);
+                Student removedStudent = students.remove(i);
                 found = true;
             }
         }
         if(!found) System.out.println("No student found with id " + id + "  and name " + name);
+        fileController.save(getString(), className);
     }
 
     public double getTotalEarnings() {
@@ -116,4 +124,39 @@ public class Students {
         return noOfExams;
     }
 
+    public String getString(){
+        String classInfo = className + "\t\t\t\t";
+        for(Student student: students){
+            classInfo = classInfo.concat(student.getString() + "\t\t\t\t");
+        }
+        classInfo = classInfo.concat(Double.toString(totalEarnings));
+        return classInfo;
+    }
+
+    public void load(){
+        String[] data = fileController.load(className);
+        if(data.length == 1) return;
+        this.className = data[0];
+        for(int i=1; i< data.length-1; i++){
+            Student student = new Student(data[i].split("\t\t"));
+            students.add(student);
+        }
+        totalEarnings = Double.parseDouble(data[data.length-1]);
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+
+    public void setTotalEarnings(double totalEarnings) {
+        this.totalEarnings = totalEarnings;
+    }
 }
