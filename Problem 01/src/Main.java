@@ -37,9 +37,9 @@ public class Main {
                     classes[className-1].addStudent(id, name, subjects);
                 }
                 case 2 -> {
+                    int className = getClassName();
                     int id = getId();
                     String name = getName();
-                    int className = getClassName();
                     if(className == 0) break;
                     int subName = getSubject();
                     if(subName == 0) break;
@@ -58,9 +58,9 @@ public class Main {
                     }
                 }
                 case 3 -> {
+                    int className = getClassName();
                     int id = getId();
                     String name = getName();
-                    int className = getClassName();
                     classes[className-1].deleteStudent(id, name);
                 }
 
